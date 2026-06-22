@@ -8,10 +8,9 @@
 #include<linux/of.h>
 #include<linux/gpio.h>
 #include<linux/interrupt.h>
-#include <linux/math64.h> // need to perform divison for 64bit in 32bit machine 
+#include <linux/math64.h> 
 
 //ilm - interrupt latency measurment
-// do uname -r on your target device to which version of kernel use same documentation
 
 #define READ_BUFF_SIZE 256
 
@@ -39,8 +38,7 @@ static int ilm_open(struct inode *inode, struct file *filp){
 }
 
 static ssize_t ilm_read(struct file *filp, char __user *buf, size_t count, loff_t *offset) {
-    // Retrieve our private structure from the file pointer
-
+    
     int len = 0;
     struct ilm_prvdata *prvdata = filp->private_data;
 
@@ -75,7 +73,7 @@ struct file_operations f_ops = {
 /*understand the below function in detail*/
 static irqreturn_t ilm_handler(int irq,void *dev_id){
 
-    struct ilm_prvdata *prvdata = dev_id; //why declare struct this way? where does device id point to?
+    struct ilm_prvdata *prvdata = dev_id; 
     prvdata->irq_time_th = ktime_get();
     return IRQ_WAKE_THREAD;
 }
@@ -124,7 +122,7 @@ static int ilm_probe(struct platform_device *pdev){
         return -ENOMEM;
     }
 
-    platform_set_drvdata(pdev,prvdata); //why this line get detialed info later
+    platform_set_drvdata(pdev,prvdata); 
 
     prvdata->interrupt_number = platform_get_irq(pdev,0);
     if(prvdata->interrupt_number < 0){
