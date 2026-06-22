@@ -220,4 +220,4 @@ module_platform_driver(ilm_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("vikram D");
-MODULE_DESCRIPTION("A driver measure the performance"); // edit this later
+MODULE_DESCRIPTION("A driver measure interrupt latency"); // edit this later
